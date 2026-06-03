@@ -1,0 +1,13 @@
+syncnet-python
+opencv-python-headless
+tqdm
+pandas
+torch
+torchvision
+gradio
+huggingface_hub
+scenedetect==0.5.6.1
+python-speech-features
+scipy
+librosa
+ffmpeg-python
