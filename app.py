@@ -1,7 +1,14 @@
 import os
+import sys
+import subprocess
+
+# 0. THE CLOUD HACK (Bypass Docker Strictness)
+# ==========================================
+print("Applying legacy Scenedetect patch...")
+subprocess.check_call([sys.executable, "-m", "pip", "install", "scenedetect==0.5.6.1"])
+
 import cv2
 import torch
-import subprocess
 import numpy as np
 import gradio as gr
 from torchvision import models, transforms
@@ -54,7 +61,8 @@ def predict_video(user_video_path):
     
     try:
         # A. Degradation (SAFE FFmpeg command for silent videos)
-        cmd = f'ffmpeg -i "{user_video_path}" -vf "gblur=sigma=3" -c:v libx264 -crf 35 -map 0:v -map 0:a? -c:a copy "{temp_laundered}" -y -loglevel error'
+        # A. Format Standardization (NO DEGRADATION)
+        cmd = f'ffmpeg -i "{user_video_path}" -c:v libx264 -crf 18 -preset fast -map 0:v -map 0:a? -c:a copy "{temp_laundered}" -y -loglevel error'
         subprocess.run(cmd, shell=True)
 
         # B. Spatial Score (ResNet)
@@ -82,16 +90,20 @@ def predict_video(user_video_path):
         fused = (alpha * s_score) + ((1 - alpha) * t_score)
         
         # ==========================================
-        # 🚨 PLUG IN YOUR GRAPH THRESHOLD HERE 🚨
+        # 🚨 DYNAMIC FUSION GATE (HD CALIBRATED) 🚨
         # ==========================================
-        my_threshold = 3.5  # Change this number based on your Colab graph!
+        # Threshold is 5.8 for very low quality (< 0.2), and 6.5 for everything else
+        if alpha < 0.25:
+            dynamic_threshold = 5.8
+        else:
+            dynamic_threshold = 6.5
         
-        if fused > my_threshold:
+        if fused > dynamic_threshold:
             verdict = "🟢 LIKELY REAL"
         else:
             verdict = "🔴 LIKELY FAKE"
         
-        return f"Verdict: {verdict}\n\nDeepfake Risk Score: {fused:.2f}\n(Spatial: {s_score:.2f} | Temporal: {t_score:.2f} | Quality: {alpha:.2f})"
+        return f"Verdict: {verdict}\n\nDeepfake Risk Score: {fused:.2f} (Needs > {dynamic_threshold:.2f} to be Real)\n(Spatial: {s_score:.2f} | Temporal: {t_score:.2f} | Quality: {alpha:.2f})"
         
     except Exception as e:
         return f"Error processing video. Details: {str(e)}"
