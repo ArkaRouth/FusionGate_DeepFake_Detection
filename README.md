@@ -1,7 +1,7 @@
 # 🕵️‍♂️ Fusion Gate Deepfake Detector
 
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-blue)](https://huggingface.co/spaces/minus2/Fusion-Gate-Deepfake-Detector)
-[![GitHub Actions CI/CD](https://img.shields.io/github/actions/workflow/status/YourUsername/YourRepoName/sync_to_hf.yml?label=HF%20Sync)](https://github.com/ArkaRouth/FusionGate_DeepFake_Detection/actions)
+[![GitHub Actions CI/CD](https://img.shields.io/github/actions/workflow/status/ArkaRouth/FusionGate_DeepFake_Detection/sync_to_hf.yml?label=HF%20Sync)](https://github.com/ArkaRouth/FusionGate_DeepFake_Detection/actions)
 
 A multimodal Machine Learning pipeline that detects deepfake videos by fusing Spatial (pixel-level) and Temporal (lip-sync) anomaly detection algorithms.
 
