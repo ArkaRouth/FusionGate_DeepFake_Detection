@@ -1,12 +1,6 @@
 import os
 import sys
 import subprocess
-
-# 0. THE CLOUD HACK (Bypass Docker Strictness)
-# ==========================================
-print("Applying legacy Scenedetect patch...")
-subprocess.check_call([sys.executable, "-m", "pip", "install", "scenedetect==0.5.6.1"])
-
 import cv2
 import torch
 import numpy as np
@@ -90,7 +84,7 @@ def predict_video(user_video_path):
         fused = (alpha * s_score) + ((1 - alpha) * t_score)
         
         # ==========================================
-        # 🚨 DYNAMIC FUSION GATE (HD CALIBRATED) 🚨
+        #  DYNAMIC FUSION GATE (HD CALIBRATED) 
         # ==========================================
         # Threshold is 5.8 for very low quality (< 0.2), and 6.5 for everything else
         if alpha < 0.25:
