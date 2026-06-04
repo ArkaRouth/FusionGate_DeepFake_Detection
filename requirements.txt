@@ -6,7 +6,6 @@ torch
 torchvision
 gradio
 huggingface_hub
-scenedetect==0.5.6.1
 python-speech-features
 scipy
 librosa
