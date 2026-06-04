@@ -1,4 +1,12 @@
-# 🕵️‍♂️ Fusion Gate Deepfake Detector
+---
+title: Fusion Gate Deepfake Detector
+emoji: 🕵️‍♂️
+colorFrom: blue
+colorTo: red
+sdk: gradio
+app_file: app.py
+pinned: false
+---
 
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Demo-Hugging%20Face-blue)](https://huggingface.co/spaces/minus2/Fusion-Gate-Deepfake-Detector)
 [![GitHub Actions CI/CD](https://img.shields.io/github/actions/workflow/status/ArkaRouth/FusionGate_DeepFake_Detection/sync_to_hf.yml?label=HF%20Sync)](https://github.com/ArkaRouth/FusionGate_DeepFake_Detection/actions)
