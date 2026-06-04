@@ -1,6 +1,16 @@
 import os
 import sys
 import subprocess
+import traceback
+# 0. THE CLOUD HACK 
+# ==========================================
+print("Applying legacy Scenedetect patch to fix VideoManager bug...")
+try:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "scenedetect==0.5.6.1"])
+    print("Patch successful!")
+except Exception as e:
+    print(f"Patch failed: {e}")
+
 import cv2
 import torch
 import numpy as np
